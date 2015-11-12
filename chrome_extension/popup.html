@@ -28,9 +28,7 @@
         max-width: 4000px;
       }
     </style>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- <script src="popup.js"></script>  -->
-    <script src="utils.js"></script>
+    <script src="jquery-2.1.4.js"></script>
     <script>
     $(document).ready( function(){
       $("#btn1").click( function(){
@@ -43,13 +41,16 @@
           dataType: 'jsonp',
           jsonp: 'callback',
           jsonpCallback: 'myParser',
-          success: renderURLResult,
-          // error: renderStatus("Error in ajax call")
+          success:
+            function (data, textStatus, jqXHR) {
+              document.getElementById('urlTarget').innerHTML = data['url'];
+            },
+          error:
+            function (jqXHR, textStatus, errorThrown) {
+              document.getElementById('status').textContent = statusText;
+            }
         });
-
-
       });
-
     });
 
     </script>
@@ -64,13 +65,3 @@
   </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
