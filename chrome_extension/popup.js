@@ -12,7 +12,7 @@
           url: 'http://localhost:8080/amazon_prod/testing',
           dataType: 'jsonp',
           jsonp: 'callback',
-          jsonpCallback: 'myParserqv',
+          jsonpCallback: 'myParser',
           success:
             function (data, textStatus, jqXHR) {
               document.getElementById('urlTarget').innerHTML = data['url'];
