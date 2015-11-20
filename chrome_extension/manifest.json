@@ -16,5 +16,5 @@
     "matches": ["<all_urls>"],
     "js": [ "jquery-2.1.4.js" ]
   }],
-  "content_security_policy": "script-src 'self' http://localhost:8080/amazon_prod/testing; object-src 'self'"
+  "content_security_policy": "script-src 'self' http://localhost:8080/; object-src 'self'"
 }
