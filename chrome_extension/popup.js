@@ -2,6 +2,28 @@
  Lucid popup window	
  *******************/
 
+    $(document).ready( function(){
+      $("#btn1").click( function(){
+        window.myParser = function(data){
+          console.log('plz work');
+        };
+        $.ajax({
+          type: 'GET',
+          url: 'http://localhost:8080/amazon_prod/testing',
+          dataType: 'jsonp',
+          jsonp: 'callback',
+          jsonpCallback: 'myParser',
+          success:
+            function (data, textStatus, jqXHR) {
+              document.getElementById('urlTarget').innerHTML = data['url'];
+            },
+          error:
+            function (jqXHR, textStatus, errorThrown) {
+              document.getElementById('status').textContent = textStatus;
+            }
+        });
+      });
+    });
 /* Get the current URL */
 function getCurrentTabUrl(callback) {
 
