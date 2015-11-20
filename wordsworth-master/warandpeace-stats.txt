@@ -6,70 +6,70 @@ Mean word length /chars = 4.49533924827
 Total words parsed = 565574
 Total chars parsed = 2542447
 
-=== Commonest 1-words ===
+=== Most Common 1-grams ===
 1 = the (34546 = 6.108%)
 2 = and (22139 = 3.914%)
 3 = to (16704 = 2.953%)
 4 = of (14985 = 2.649%)
 5 = a (10513 = 1.858%)
 
-=== Commonest 2-words ===
+=== Most Common 2-grams ===
 1 = of the (4057 = 0.717%)
 2 = to the (2329 = 0.411%)
 3 = in the (2324 = 0.410%)
 4 = and the (1468 = 0.259%)
 5 = at the (1345 = 0.237%)
 
-=== Commonest 3-words ===
+=== Most Common 3-grams ===
 1 = he did not (223 = 0.039%)
 2 = one of the (186 = 0.032%)
 3 = out of the (178 = 0.031%)
 4 = that he was (155 = 0.027%)
 5 = as soon as (146 = 0.025%)
 
-=== Commonest 4-words ===
+=== Most Common 4-grams ===
 1 = the commander in chief (82 = 0.014%)
 2 = for a long time (77 = 0.013%)
 3 = for the first time (69 = 0.012%)
 4 = at the same time (61 = 0.010%)
 5 = in the middle of (52 = 0.009%)
 
-=== Commonest 5-words ===
+=== Most Common 5-grams ===
 1 = in the middle of the (34 = 0.006%)
 2 = it seemed to him that (23 = 0.004%)
 3 = the other side of the (20 = 0.003%)
 4 = up and down the room (20 = 0.003%)
 5 = at the end of the (17 = 0.003%)
 
-=== Commonest 6-words ===
+=== Most Common 6-grams ===
 1 = the project gutenberg literary archive foundation (13 = 0.002%)
 2 = in the middle of the room (11 = 0.001%)
 3 = it seemed to him that he (8 = 0.001%)
 4 = but what am i to do (7 = 0.001%)
 5 = the collective will of the people (7 = 0.001%)
 
-=== Commonest 7-words ===
+=== Most Common 7-grams ===
 1 = it seemed to him that he was (6 = 0.001%)
 2 = to the project gutenberg literary archive foundation (6 = 0.001%)
 3 = to get away as quickly as possible (5 = 0.000%)
 4 = that it was impossible for him to (4 = 0.000%)
 5 = that the will of the people is (4 = 0.000%)
 
-=== Commonest 8-words ===
+=== Most Common 8-grams ===
 1 = shall look forward very much to your return (3 = 0.000%)
 2 = what am i to do if i love (3 = 0.000%)
 3 = that the collective will of the people is (3 = 0.000%)
 4 = in the morning of the second of september (3 = 0.000%)
 5 = donations to the project gutenberg literary archive foundation (3 = 0.000%)
 
-=== Commonest 9-words ===
+=== Most Common 9-grams ===
 1 = its three bridges advancing to the same heights as (2 = 0.000%)
 2 = i will detain you no longer general you shall (2 = 0.000%)
 3 = to give up all the carts to the wounded (2 = 0.000%)
 4 = his wish to be present at the battle and (2 = 0.000%)
 5 = 1 e 8 or 1 e 9 1 e (2 = 0.000%)
 
-=== Commonest 10-words ===
+=== Most Common 10-grams ===
 1 = under the same conditions and with the same character he (2 = 0.000%)
 2 = what we shall see that is what we shall see (2 = 0.000%)
 3 = jesus christ holy saint nicholas frola and lavra lord jesus (2 = 0.000%)
