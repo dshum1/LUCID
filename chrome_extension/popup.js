@@ -70,47 +70,9 @@ function sendGetRequest(url, callback) {
 
 document.addEventListener('DOMContentLoaded', function() {
 	getCurrentTabUrl(function(url) {
-		// this is a simple dumby python file that should make a file <test.txt> and print out stuff
-		renderStatus('calling localhost:8080');
-
-		// sendGetRequest("http://localhost:8080/amazon_prod/" + url, renderURL)
-
-		/////////
-		$.ajax({
-			type: "GET",
-		  	url: "http://localhost:8080/amazon_prod/" + url,
-		  	success: renderURL("successful ajax call")
-		});
-
-
-		/////////// 
-		var xhttp = new XMLHttpRequest();
-		xhttp.onreadystatechange = function() {
-			if (xhttp.readyState == 4 && xhttp.status == 0) {
-		    	renderURL(xhttp.responseText);
-			}
-		}
-		xhttp.open("GET", "http://localhost:8080/amazon_prod/" + url, true);
-		// xhttp.send("amazon_prod/" + url);
-		xhttp.send();
-
-
-		/////////// Wut is going on
-		// function httpGetAsync(url, callback) {
-		//     var xmlHttp = new XMLHttpRequest();
-		//     xmlHttp.onreadystatechange = function() { 
-		//         if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-		//             callback(xmlHttp.responseText);
-		//     }
-		//     xmlHttp.open("GET", url, true); // true for asynchronous 
-		//     xmlHttp.send(null);
-		// }
-
-
-
-
-		renderStatus('Call complete.');
-		// renderURL("tab url: " + url);
+		
+		// renderStatus('Call complete.');
+		renderURL("tab url: " + url);
 	});
 });
 
