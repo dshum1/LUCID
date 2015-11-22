@@ -2,6 +2,7 @@ from amazon_scraper import AmazonScraper
 import json
 import re
 import sys
+import nlp
 
 amzn = AmazonScraper("AKIAI2KDJUR74W4HWZEQ", "w9gYu178es+Q6K5U+Q9YXEVrkPg5jsVWmtqIXwAI", "lucid064")
 

@@ -7,6 +7,7 @@
 from bottle import Bottle, response, template
 import json
 import review_parser
+import nlp
 
 ###############################################################################
 
@@ -33,14 +34,17 @@ def server_static(filename):
 # Accept Amazon URL path parameter
 @app.route('/amazon_prod/<target_url:path>', method="GET")
 def getReviews(target_url):
-	# return template('The url of the amazon product is {{url}}', url=target_url)
-	# return bottle.HTTPResponse(status=200, body="foobar")
-	# response.status = 200
-	# response.content_type = 'text/plain'
-	# return "foobar"
+
+	# Scrape page for reviews
+	print "[server] Gathering Reviews..."
 	prod_url = target_url
 	item_id = review_parser.get_item_id(prod_url)
 	reviews = review_parser.get_reviews(item_id)
+
+	# parse reviews. Outputs to stdout and a file
+	print "[server] Analyzing Reviews..."
+	parsed_reviews = nlp.nlp_analyze(reviews)
+
 	d = json.dumps(dict(url=reviews))
 	return 'myParser(' + d + ');'
 

@@ -1,8 +1,8 @@
 {
   "name": "Lucid",
   "manifest_version": 2,
-  "version": "1.1",
-  "description": "Barebones. Feeds the current tab url into the Amazon scraper.",
+  "version": "2.0",
+  "description": "current tab url -> bottle server -> scraper -> nlp -> extension",
   "browser_action": {
     "default_icon": "icon.png",
     "default_popup": "popup.html",

@@ -22,6 +22,7 @@
 import re
 import collections
 import nltk
+import json
 
 # Font effects --> fancy console colours in bash
 underline = "\x1b[1;4m"
@@ -202,6 +203,153 @@ def print_results(word_stats, output_file):
     out.write('\nARI (Automated Readability Index) score = ' + str(word_stats['ARI_score'])[:5] + '%')
 
     print '\nWritten results to ' + args.inputfile.split('.')[0] + '-stats.txt\n'
+
+# PERFORM NLP ANALYSIS
+#   input = text file to parse
+#   max_n_word = the max length n-gram. default is 4
+#   top_n = the top n most frequent k-grams. default is 20
+#   allowdigits = allow digits to be parsed. default is true
+#   ignore_list = file of words to ignore
+def ntlk_analysis(inputfile, max_n_word_arg, top_n, allow_digits=true, ignore=ignore.json):
+    # build ignore list from argument file
+    ignore_list = json.load(ignore);
+
+     # Dynamically allocated n-word counters
+    max_n_word = max_n_word_arg
+    n_words = ['' for i in range(max_n_word)]
+    prev_n_words = ['' for i in range(max_n_word)]
+    counters = [collections.Counter() for i in range(max_n_word)]
+
+    # Word length counter
+    word_length_counter = collections.Counter()
+
+    # Read in all of the words in a file
+    print "[+] Reading text from '" + inputfile + "'..."
+    text = open(inputfile).read().lower()
+
+    # Use nltk to classify/tag each word/token.
+    print "[+] Tokenizing text..."
+    text = open(args.inputfile).read().lower()
+    tokenizer = nltk.tokenize.RegexpTokenizer(r'\w+|[^\w\s]+')
+    tokens = tokenizer.tokenize(text)
+
+    print "[+] Tagging tokens..."
+    tagger = nltk.UnigramTagger(nltk.corpus.brown.tagged_sents())
+    tagged_tokens = tagger.tag(tokens)
+
+    print "[+] Tallying tags..."
+    personal_pronoun_counter = collections.Counter()
+    adjective_counter = collections.Counter()
+    adverb_counter = collections.Counter()
+    noun_counter = collections.Counter()
+    verb_counter = collections.Counter()
+
+     for token in tagged_tokens:
+
+        if token[1] == None:
+            continue
+
+        elif 'PPS' in token[1]:
+            personal_pronoun_counter[token[0]] += 1
+
+        elif 'JJ' in token[1]:
+            adjective_counter[token[0]] += 1
+
+        elif 'NN' in token[1]:
+            noun_counter[token[0]] += 1
+
+        elif 'RB' in token[1]:
+            adverb_counter[token[0]] += 1
+
+        elif 'VB' in token[1]:
+            verb_counter[token[0]] += 1
+
+     # Shall we include digits?
+    if args.allowdigits:
+        words = re.findall(r"['\-\w]+", text)
+    else:
+        words = re.findall(r"['\-A-Za-z]+", text)
+
+    print "[+] Counting sentences..."
+    word_stats['total_sentences'] = len(nltk.sent_tokenize(text.decode('utf-8')))
+
+    print "[+] Performing frequency analysis of n-words..."
+    for word in words:
+    
+        if word in ignore_list:
+            continue
+        
+        word = word.strip(r"&^%$#@!")
+
+        # Allow hyphenated words, but not hyphens as words on their own.
+        if word == '-':
+            continue
+
+        # # Record all word lengths
+        # length = len(word)
+        # word_length_counter[str(length)] += 1
+
+        # # Record longest word length
+        # if length > word_stats['max_length']:
+        #     word_stats['max_length'] = length
+        #     word_stats['longest_word'] = word
+
+        # # Record shortest word length
+        # if length < word_stats['min_length']:
+        #     word_stats['min_length'] = length
+        #     word_stats['shortest_word'] = word
+
+        # # Keep track of the total number of words and chars read.
+        # word_stats['total_chars'] += length
+        # word_stats['total_words'] += 1.0
+
+        # # Tally the charaters in each word.
+        # for char in word:
+        #     if char.lower() in word_stats['char_counts']:
+        #         word_stats['char_counts'][char.lower()] += 1.0
+
+        # Tally words.
+        for i in range(1, max_n_word):
+            if prev_n_words[i - 1] != '':
+                n_words[i] = prev_n_words[i - 1] + ' ' + word
+                counters[i][n_words[i]] += 1
+
+        n_words[0] = word
+        counters[0][word] += 1
+
+        for i in range(0, max_n_word):
+            prev_n_words[i] = n_words[i]
+
+    # # Calculate the mean word length
+    # word_stats['mean_length'] = word_stats['total_chars'] / word_stats['total_words']
+
+    # # Calculate relative character frequencies
+    # for char in word_stats['char_counts']:
+    #     char_count = word_stats['char_counts'][char]
+    #     total_chars = word_stats['total_chars']
+    #     percentage = 100.0 * (char_count / total_chars)
+    #     word_stats['char_percentages'][char] = percentage
+
+    # # Calculate the lexical density of the text.
+    # total_unique_words = len(counters[0])
+    # total_words = sum(counters[0].values())
+    # word_stats['lexical_density'] = 100.0 * total_unique_words / float(total_words)
+
+    # # Calculate the ARI score.
+    # # See http://www.usingenglish.com/members/text-analysis/help/readability.html
+    # total_words = sum(counters[0].values())
+    # ASL = total_words / float(word_stats['total_sentences'])
+    # ALW = word_stats['total_chars'] / float(total_words)
+    # word_stats['ARI_score'] = (0.5 * ASL) + (4.71 * ALW) - 21.43
+
+    # Print results
+    out = open(inputfile.split('.')[0] + '-stats.txt', 'w')
+    print_results(word_stats, out)
+    out.close()
+
+
+##########################################################################################
+##########################################################################################
 
 
 if __name__ == '__main__':
