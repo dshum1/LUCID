@@ -18,13 +18,14 @@ def get_reviews(item_id):
 	full_reviews = []
 	counter = 0
 	for r in reviews:
-		if counter < 50:
+		if counter < 10:
 			full_reviews.append(r.text)
 			counter = counter + 1
 		else:
 			break
-	out_file = open("reviews.json", "w")
-	json.dump(full_reviews,out_file)
+	return full_reviews
+	# out_file = open("reviews.json", "w")
+	# json.dump(full_reviews,out_file)
 
 if __name__ == "__main__":
 	socks_url = sys.argv[1]

@@ -6,6 +6,7 @@
 
 from bottle import Bottle, response, template
 import json
+import review_parser
 
 ###############################################################################
 
@@ -37,7 +38,10 @@ def getReviews(target_url):
 	# response.status = 200
 	# response.content_type = 'text/plain'
 	# return "foobar"
-	d = json.dumps(dict(url=target_url))
+	prod_url = target_url
+	item_id = review_parser.get_item_id(prod_url)
+	reviews = review_parser.get_reviews(item_id)
+	d = json.dumps(dict(url=reviews))
 	return 'myParser(' + d + ');'
 
 
