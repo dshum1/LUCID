@@ -4,10 +4,6 @@ import re
 import sys
 import nlp
 
-amzn = AmazonScraper("AKIAI2KDJUR74W4HWZEQ", "w9gYu178es+Q6K5U+Q9YXEVrkPg5jsVWmtqIXwAI", "lucid064")
-
-# socks_url = "http://www.amazon.com/Hanes-Ultimate-Socks-White-10-13/dp/B00FBD2G0I/"
-
 def get_item_id(url):
 	m = re.search(r"\/dp\/\w+\/", url)
 	if m:
