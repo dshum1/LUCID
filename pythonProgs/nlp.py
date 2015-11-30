@@ -70,16 +70,17 @@ def print_n_word_frequencies(n_word_counter, top_n, out, tag=None):
 
 
 # PERFORM NLP ANALYSIS
-#   input = text file to parse
+#   input_list = text to parse 
 #   max_n_word = the max length n-gram. default is 4
 #   top_n = the top n most frequent k-grams. default is 20
 #   allowdigits = allow digits to be parsed. default is true
-#   ignore_list = file of words to ignore
-def nlp_analyze(input_list, max_n_word=4, top_n=20, allow_digits=True):
+#   ignore_file = file of words to ignore in json format. 
+def nlp_analyze(input_list, max_n_word=4, top_n=20, allow_digits=True, ignore_file='ignore.json'):
    
-    # build ignore list from argument file
-    with open('ignore2.json') as ignore_json:
-        ignore_list = json.load(ignore_json);
+    # build ignore list from argument file 
+    print "[nlp] Building ignore list..."
+    with open(ignore_file) as ignore_json:
+        ignore_list = json.load(ignore_json)
 
     # Dynamically allocated n-word counters
     n_words = ['' for i in range(max_n_word)]

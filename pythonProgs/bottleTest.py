@@ -31,18 +31,35 @@ def server_static(filename):
 
 ###############################################################################
 
-# Accept Amazon URL path parameter
+# Amazon Page Review Summaries
 @app.route('/amazon_prod/<target_url:path>', method="GET")
 def getReviews(target_url):
 
-	# Scrape page for reviews
-	print "[server] Gathering Reviews..."
-	prod_url = target_url
-	item_id = review_parser.get_item_id(prod_url)
-	reviews = review_parser.get_reviews(item_id)
+	# Check if url has been cached. else scrape page for reviews
+	###  !!!  does the parser return json or just text???
+	try:
+		print "[server] Gathering reviews from file..."
+		
+		######  Just some TEST shiz  #######
+		with open('reviews.json') as reviews_from_file:
+			reviews = json.load(reviews_from_file)
+
+		######  this is the real code  #######
+		# # turn the given url into a file name. 
+		# # (Files of cached reviews will be named after their url)
+		# reviews_file = target_url.replace('/','_');
+		# with open('cached_reviews/'+reviews_file) as reviews_from_file
+		# reviews = json.load(reviews_from_file)
+
+		print "[server] Gathered reviews."
+	except: 
+		# Scrape Amazon page for reviews
+		print "[server] Gathering reviews from Amazon.com..."
+		item_id = review_parser.get_item_id(target_url)
+		reviews = review_parser.get_reviews(item_id)
 
 	# parse reviews. Outputs to stdout and a file
-	print "[server] Analyzing Reviews..."
+	print "[server] Analyzing reviews..."
 	parsed_reviews = nlp.nlp_analyze(reviews)
 
 	d = json.dumps(dict(url=reviews))
@@ -53,3 +70,8 @@ def getReviews(target_url):
 # Start Server
 if __name__ == '__main__':
 	app.run(host='localhost', port=8080, debug=True)
+
+
+
+
+
