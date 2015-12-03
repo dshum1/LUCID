@@ -107,32 +107,32 @@ def nlp_analyze(input_list, max_n_word=4, top_n=20, allow_digits=True, ignore_fi
     tokenizer = nltk.tokenize.RegexpTokenizer(r'\w+|[^\w\s]+')
     tokens = tokenizer.tokenize(text)
 
-    # print "[nlp] Tagging tokens..."
-    # tagger = nltk.UnigramTagger(nltk.corpus.brown.tagged_sents())
-    # tagged_tokens = tagger.tag(tokens)
+    print "[nlp] Tagging tokens..."
+    tagger = nltk.UnigramTagger(nltk.corpus.brown.tagged_sents())
+    tagged_tokens = tagger.tag(tokens)
 
-    # print "[nlp] Tallying tags..."
-    # personal_pronoun_counter = collections.Counter()
-    # adjective_counter = collections.Counter()
-    # adverb_counter = collections.Counter()
-    # noun_counter = collections.Counter()
-    # verb_counter = collections.Counter()
+    print "[nlp] Tallying tags..."
+    personal_pronoun_counter = collections.Counter()
+    adjective_counter = collections.Counter()
+    adverb_counter = collections.Counter()
+    noun_counter = collections.Counter()
+    verb_counter = collections.Counter()
 
-    # for token in tagged_tokens:
-    #     if token[1] == None:
-    #         continue
-    #     elif 'PPS' in token[1]:
-    #         personal_pronoun_counter[token[0]] += 1
-    #     elif 'JJ' in token[1]:
-    #         adjective_counter[token[0]] += 1
-    #     elif 'NN' in token[1]:
-    #         noun_counter[token[0]] += 1
-    #     elif 'RB' in token[1]:
-    #         adverb_counter[token[0]] += 1
-    #     elif 'VB' in token[1]:
-    #         verb_counter[token[0]] += 1
+    for token in tagged_tokens:
+        if token[1] == None:
+            continue
+        elif 'PPS' in token[1]:
+            personal_pronoun_counter[token[0]] += 1
+        elif 'JJ' in token[1]:
+            adjective_counter[token[0]] += 1
+        elif 'NN' in token[1]:
+            noun_counter[token[0]] += 1
+        elif 'RB' in token[1]:
+            adverb_counter[token[0]] += 1
+        elif 'VB' in token[1]:
+            verb_counter[token[0]] += 1
 
-    # Shall we include digits?
+    # Include digits? default parameter value is yes. 
     if allow_digits:
         words = re.findall(r"['\-\w]+", text)
     else:
@@ -165,7 +165,8 @@ def nlp_analyze(input_list, max_n_word=4, top_n=20, allow_digits=True, ignore_fi
     # Print results to file.
     print "[nlp] Text analyzed. Outputting results..."
     # print '\n===' + blue + ' RESULTS ' + normal + '==='
-    out = open('output-stats.txt', 'w')
+
+    out = open('output_stats/Polaroid-output-stats.txt', 'w')
     out.write('=== RESULTS ===\n')
 
     # Build dictionary of results
@@ -173,11 +174,11 @@ def nlp_analyze(input_list, max_n_word=4, top_n=20, allow_digits=True, ignore_fi
     for i in range(max_n_word):
         results_dict[str(i+1)+'-gram'] = print_n_word_frequencies(counters[i], top_n, out)
 
-    # print_n_word_frequencies(personal_pronoun_counter, top_n, out, tag="Personal Pronouns")
-    # print_n_word_frequencies(noun_counter, top_n, out, tag="Nouns")
-    # print_n_word_frequencies(adjective_counter, top_n, out, tag="Adjectives")
-    # print_n_word_frequencies(adverb_counter, top_n, out, tag="Adverbs")
-    # print_n_word_frequencies(verb_counter, top_n, out, tag="Verbs")
+    results_dict['pps'] = print_n_word_frequencies(personal_pronoun_counter, top_n, out, tag="Personal Pronouns")
+    results_dict['nouns'] = print_n_word_frequencies(noun_counter, top_n, out, tag="Nouns")
+    results_dict['adjectives'] = print_n_word_frequencies(adjective_counter, top_n, out, tag="Adjectives")
+    results_dict['advergs'] = print_n_word_frequencies(adverb_counter, top_n, out, tag="Adverbs")
+    results_dict['verbs'] = print_n_word_frequencies(verb_counter, top_n, out, tag="Verbs")
 
     out.close()
     print "[nlp] Done."
