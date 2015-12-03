@@ -1,0 +1,25 @@
+=== RESULTS ===
+
+=== Commonest 1-words ===
+1 = socks (29 = 4.882%)
+2 = good (16 = 2.693%)
+3 = for (12 = 2.020%)
+4 = they (11 = 1.851%)
+
+=== Commonest 2-words ===
+1 = good quality (4 = 0.674%)
+2 = great socks (4 = 0.674%)
+3 = very comfortable (3 = 0.505%)
+4 = good fit (3 = 0.505%)
+
+=== Commonest 3-words ===
+1 = very comfortable socks (2 = 0.337%)
+2 = these great socks (2 = 0.337%)
+3 = fit as expected (2 = 0.337%)
+4 = buy buying them (1 = 0.168%)
+
+=== Commonest 4-words ===
+1 = pair having red orange (1 = 0.169%)
+2 = well are very comfortable (1 = 0.169%)
+3 = it was shipped from (1 = 0.169%)
+4 = total right leg amputee (1 = 0.169%)
