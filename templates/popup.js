@@ -16,8 +16,18 @@ $(document).ready( function(){
 				jsonpCallback: 'myParser',
 				success:
 	            function (data, textStatus, jqXHR) {
-	            	var parsed_reviews = data['revs']
-	            	document.getElementById('4-gram').innerHTML = data['revs']['3-gram'][1]['rank']
+	            	var parsed_reviews = data['revs'];
+	            	var reviews = [];
+	            	var two_gram = data['revs']['2-gram'];
+	            	var three_gram = data['revs']['3-gram'];
+	            	var four_gram = data['revs']['4-gram'];
+	            	for (i = 0; i < two_gram.length; i++)
+	            		reviews.push(two_gram[i]['words']);
+	            	for (i = 0; i < three_gram.length; i++)
+	            		reviews.push(three_gram[i]['words']);
+	            	for (i = 0; i < four_gram.length; i++)
+	            		reviews.push(four_gram[i]['words']);	            	
+	            	document.getElementById('4-gram').innerHTML = reviews;
 
 	                document.getElementById('urlTarget').innerHTML = data['url'];
 	            },
