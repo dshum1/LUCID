@@ -44,28 +44,38 @@ previous_quad = ''
 def print_n_word_frequencies(n_word_counter, top_n, out, tag=None):
     total_entries = sum(n_word_counter.values())
     unique_entries = len(n_word_counter)
+    result_list = []
     if total_entries > 0:
         m = n_word_counter.most_common(min(unique_entries, top_n))
         n = len(m[0][0].split(' '))
 
         if tag == None:
-            print '\n===' + blue + ' Commonest ' + str(n) + '-words' + normal + ' ==='
+            # print '\n===' + blue + ' Commonest ' + str(n) + '-words' + normal + ' ==='
             out.write('\n=== Commonest ' + str(n) + '-words ===\n')
+            # dictKey = str(n) + "-gram"
         else:
-            print '\n===' + blue + ' Commonest ' + tag + normal + ' ==='
+            # print '\n===' + blue + ' Commonest ' + tag + normal + ' ==='
             out.write('\n=== Commonest ' + tag + ' ===\n')
+            # dictKey = tag
 
         for i in range(0, min(unique_entries, top_n)):
             n_word = m[i][0]
             count = m[i][1]
             perc = 100.0 * (count / float(total_entries))
 
-            print (str(i + 1) + ' = ' + purple + n_word +
-                   normal + ' (' + purple + str(count).split('.')[0] + normal +
-                   ' = ' + purple + str(perc)[:5] + '%' + normal + ')')
+            # # Print results to terminal
+            # print (str(i + 1) + ' = ' + purple + n_word +
+            #        normal + ' (' + purple + str(count).split('.')[0] + normal +
+            #        ' = ' + purple + str(perc)[:5] + '%' + normal + ')')
 
+            # Write results to file
             out.write(str(i + 1) + ' = ' + n_word + ' (' + str(count).split('.')[0] +
             ' = ' + str(perc)[:5] + '%)\n')
+
+            # Build results list
+            result_list.append({'words':n_word, 'rank':i+1, 'count':count, "percent":perc})
+
+    return result_list
 
 
 
@@ -90,45 +100,39 @@ def nlp_analyze(input_list, max_n_word=4, top_n=20, allow_digits=True, ignore_fi
     # Read in all of the words in a file
     print "[nlp] Reading reviews..."
     text = '. '.join(input_list).lower()
-    print "[debuggery] joined text: " + text
+    # print "[nlp] [debuggery] joined text: " + text
 
     # Use nltk to classify/tag each word/token.
     print "[nlp] Tokenizing text..."
     tokenizer = nltk.tokenize.RegexpTokenizer(r'\w+|[^\w\s]+')
     tokens = tokenizer.tokenize(text)
 
-    print "[nlp] Tagging tokens..."
-    tagger = nltk.UnigramTagger(nltk.corpus.brown.tagged_sents())
-    tagged_tokens = tagger.tag(tokens)
+    # print "[nlp] Tagging tokens..."
+    # tagger = nltk.UnigramTagger(nltk.corpus.brown.tagged_sents())
+    # tagged_tokens = tagger.tag(tokens)
 
-    print "[nlp] Tallying tags..."
-    personal_pronoun_counter = collections.Counter()
-    adjective_counter = collections.Counter()
-    adverb_counter = collections.Counter()
-    noun_counter = collections.Counter()
-    verb_counter = collections.Counter()
+    # print "[nlp] Tallying tags..."
+    # personal_pronoun_counter = collections.Counter()
+    # adjective_counter = collections.Counter()
+    # adverb_counter = collections.Counter()
+    # noun_counter = collections.Counter()
+    # verb_counter = collections.Counter()
 
-    for token in tagged_tokens:
+    # for token in tagged_tokens:
+    #     if token[1] == None:
+    #         continue
+    #     elif 'PPS' in token[1]:
+    #         personal_pronoun_counter[token[0]] += 1
+    #     elif 'JJ' in token[1]:
+    #         adjective_counter[token[0]] += 1
+    #     elif 'NN' in token[1]:
+    #         noun_counter[token[0]] += 1
+    #     elif 'RB' in token[1]:
+    #         adverb_counter[token[0]] += 1
+    #     elif 'VB' in token[1]:
+    #         verb_counter[token[0]] += 1
 
-        if token[1] == None:
-            continue
-
-        elif 'PPS' in token[1]:
-            personal_pronoun_counter[token[0]] += 1
-
-        elif 'JJ' in token[1]:
-            adjective_counter[token[0]] += 1
-
-        elif 'NN' in token[1]:
-            noun_counter[token[0]] += 1
-
-        elif 'RB' in token[1]:
-            adverb_counter[token[0]] += 1
-
-        elif 'VB' in token[1]:
-            verb_counter[token[0]] += 1
-
-     # Shall we include digits?
+    # Shall we include digits?
     if allow_digits:
         words = re.findall(r"['\-\w]+", text)
     else:
@@ -136,7 +140,6 @@ def nlp_analyze(input_list, max_n_word=4, top_n=20, allow_digits=True, ignore_fi
 
     print "[nlp] Performing frequency analysis of n-words..."
     for word in words:
-    
         word = word.strip(r"&^%$#@!")       
 
         if word in ignore_list:
@@ -159,21 +162,32 @@ def nlp_analyze(input_list, max_n_word=4, top_n=20, allow_digits=True, ignore_fi
             prev_n_words[i] = n_words[i]
 
 
-    # Print results
+    # Print results to file.
+    print "[nlp] Text analyzed. Outputting results..."
+    # print '\n===' + blue + ' RESULTS ' + normal + '==='
     out = open('output-stats.txt', 'w')
-
-    print '\n===' + blue + ' RESULTS ' + normal + '==='
     out.write('=== RESULTS ===\n')
 
+    # Build dictionary of results
+    results_dict = {}
     for i in range(max_n_word):
-        print_n_word_frequencies(counters[i], top_n, out)
+        results_dict[str(i+1)+'-gram'] = print_n_word_frequencies(counters[i], top_n, out)
 
-    print_n_word_frequencies(personal_pronoun_counter, top_n, out, tag="Personal Pronouns")
-    print_n_word_frequencies(noun_counter, top_n, out, tag="Nouns")
-    print_n_word_frequencies(adjective_counter, top_n, out, tag="Adjectives")
-    print_n_word_frequencies(adverb_counter, top_n, out, tag="Adverbs")
-    print_n_word_frequencies(verb_counter, top_n, out, tag="Verbs")
+    # print_n_word_frequencies(personal_pronoun_counter, top_n, out, tag="Personal Pronouns")
+    # print_n_word_frequencies(noun_counter, top_n, out, tag="Nouns")
+    # print_n_word_frequencies(adjective_counter, top_n, out, tag="Adjectives")
+    # print_n_word_frequencies(adverb_counter, top_n, out, tag="Adverbs")
+    # print_n_word_frequencies(verb_counter, top_n, out, tag="Verbs")
 
     out.close()
+    print "[nlp] Done."
+    return results_dict
+
+    # print "[nlp] [debuggery] results dictionary: "
+    # for i in range(max_n_word):
+    #     dict_key = str(i+1)+'-gram'
+    #     print "The key is " + dict_key
+    #     print results_dict[dict_key]
+
 
 

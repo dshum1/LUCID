@@ -51,19 +51,24 @@ def getReviews(target_url):
 		# with open('cached_reviews/'+reviews_file) as reviews_from_file
 		# reviews = json.load(reviews_from_file)
 
-		print "[server] Gathered reviews."
+		print "[server] Success. Gathered reviews from file."
+
+
+	# if reviews not cached, scrape Amazon page for reviews
 	except: 
 		# Scrape Amazon page for reviews
 		print "[server] Gathering reviews from Amazon.com..."
 		item_id = review_parser.get_item_id(target_url)
 		reviews = review_parser.get_reviews(item_id)
+		print "[server] Success. Scraped reviews from Amazon.com."
 
 	# parse reviews. Outputs to stdout and a file
 	print "[server] Analyzing reviews..."
-	parsed_reviews = nlp.nlp_analyze(reviews)
+	parsed_reviews = nlp.nlp_analyze(reviews, top_n=4)
 
-	d = json.dumps(dict(url=reviews))
+	d = json.dumps(dict(url=target_url, revs=parsed_reviews))
 	return 'myParser(' + d + ');'
+
 
 
 
