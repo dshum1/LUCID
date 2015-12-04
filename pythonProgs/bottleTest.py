@@ -64,7 +64,7 @@ def getReviews(target_url):
 
 	# parse reviews. Outputs to stdout and a file
 	print "[server] Analyzing reviews..."
-	parsed_reviews = nlp.nlp_analyze(reviews, top_n=20)
+	parsed_reviews = nlp.nlp_analyze(reviews, top_n=3)
 
 	d = json.dumps(dict(url=target_url, revs=parsed_reviews))
 	return 'myParser(' + d + ');'

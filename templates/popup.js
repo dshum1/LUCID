@@ -5,9 +5,14 @@
 $(document).ready( function(){
     $("#btn1").click( function(){
       	getCurrentTabUrl(function(target_url) {
-	        window.myParser = function(data){
-	            console.log("success!");
-	        };
+	        // window.myParser = function(data){
+	        //     console.log("success!");
+	        // };
+
+	        document.getElementById('btn1').style.display = "none";
+	        document.getElementById('status').textContent = "Reading Reviews...";
+
+	        // Call Bottle server for reviews
 	        $.ajax({
 				type: 'GET',
 				url: 'http://localhost:8080/amazon_prod/'+target_url,
@@ -17,19 +22,26 @@ $(document).ready( function(){
 				success:
 	            function (data, textStatus, jqXHR) {
 	            	var parsed_reviews = data['revs'];
-	            	var reviews = [];
+	            	var reviews2 = [];
+	            	var reviews3 = []; 
+	            	var reviews4 = [];
 	            	var two_gram = data['revs']['2-gram'];
 	            	var three_gram = data['revs']['3-gram'];
 	            	var four_gram = data['revs']['4-gram'];
 	            	for (i = 0; i < two_gram.length; i++)
-	            		reviews.push(two_gram[i]['words']);
+	            		reviews2.push(two_gram[i]['words']);
 	            	for (i = 0; i < three_gram.length; i++)
-	            		reviews.push(three_gram[i]['words']);
+	            		reviews3.push(three_gram[i]['words']);
 	            	for (i = 0; i < four_gram.length; i++)
-	            		reviews.push(four_gram[i]['words']);	            	
-	            	document.getElementById('4-gram').innerHTML = reviews;
+	            		reviews4.push(four_gram[i]['words']);	
 
-	                document.getElementById('urlTarget').innerHTML = data['url'];
+
+	            	document.getElementById('status').style.display = "none";
+
+	            	document.getElementById('2-gram_para').textContent = reviews2;
+	            	document.getElementById('3-gram_para').textContent = reviews3;
+	            	document.getElementById('4-gram_para').textContent = reviews4;
+	                // document.getElementById('urlTarget').textContent = data['url'];
 	            },
 	            error:
 	            function (jqXHR, textStatus, errorThrown) {

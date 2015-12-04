@@ -14,24 +14,80 @@
     <!-- Custom styles -->
     <link href="popup.css" rel="stylesheet">
 
-    <script src="popup.js"></script>
     <script src="jquery-2.1.4.js"></script>
-    <!-- <script src="bootstrap-3.3.6-dist/js/boostrap.js"></script> -->
+    <script src="bootstrap-3.3.6-dist/js/boostrap.js"></script>
+    <script src="popup.js"></script>
+
 
 
 
   </head>
 
   <body>
-    <div class="container">
-      <div id="status"></div>
-      <div id="urlTarget">urlTarget default text</div>
-      <div id="4-gram"></div>
+    <div id="extension_window" class="container">
+
+      <h2 id="lucid_header">Lucid</h2>
+
+      <p id="status"></p>
+
+      <!-- Progress Bar -->
+      <!-- <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+          <span class="sr-only">60% Complete</span>
+        </div>
+      </div> -->
+
+
+      <!-- <div id="urlTarget"></div> -->
+      
+<!--       <div id="1-gram" class="rev_box"></div>
+      <div id="2-gram" class="rev_box"></div>
+      <div id="3-gram" class="rev_box"></div>
+      <div id="4-gram" class="rev_box"></div> -->
 
       <button id="btn1">BUTTON</button>
+
+
+
+      <div id="2-gram_panel" class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Common 2-word phrases</h3>
+        </div>
+        <div class="rev-panel-body">
+          <p id="2-gram_para"></p>
+        </div>
+      </div>
+
+      <div id="3-gram_panel" class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Common 3-word phrases</h3>
+        </div>
+        <div class="rev-panel-body">
+          <p id="3-gram_para"></p>
+        </div>
+      </div>
+
+      <div id="4-gram_panel" class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Common 4-word phrases</h3>
+        </div>
+        <div class="rev-panel-body">
+          <p id="4-gram_para"></p>
+        </div>
+      </div>
+
+
+
     </div>
 
 
 
   </body>
 </html>
+
+
+
+
+
+
+

@@ -1,20 +1,32 @@
 body {
   font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-  font-size: 75%;
+  /*font-size: 120%;*/
+}
+
+#extension_window {
+  /* Golden Ratio */
+  width: 300px;
+  height: 485px;  
 }
 
 #status {
-  /* avoid an excessively wide status text */
   white-space: pre;
   text-overflow: ellipsis;
   overflow: visible;
-  max-width: 4000px;
 }
 
-#urlTarget {
-  /* avoid an excessively wide status text */
-  white-space: pre;
-  text-overflow: ellipsis;
-  overflow: visible;
-  max-width: 4000px;
+#lucid_header {
+  text-align: center;
+}
+
+.rev_box {
+  padding: 5px;
+}
+
+.rev-panel-body {
+  padding: 3px;
+}
+
+.panel {
+  display: none;
 }
