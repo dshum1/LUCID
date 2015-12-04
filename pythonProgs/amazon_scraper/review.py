@@ -67,8 +67,10 @@ class Review(object):
     @property
     def title(self):
         tag = self.soup.find('span', class_='summary')
-        title = unicode(tag.string)
-        return title.strip()
+        if tag:
+            title = unicode(tag.string)
+            return title.strip()
+        return ""
 
     @property
     def rating(self):
