@@ -41,7 +41,7 @@ def getReviews(target_url):
 		print "[server] Gathering reviews from file..."
 		
 		######  Just some TEST shiz  #######
-		with open('cached_reviews/polaroid.json') as reviews_from_file:
+		with open('cached_reviews/iphone_case.json') as reviews_from_file:
 			reviews = json.load(reviews_from_file)
 
 		######  this is the real code  #######
@@ -64,7 +64,7 @@ def getReviews(target_url):
 
 	# parse reviews. Outputs to stdout and a file
 	print "[server] Analyzing reviews..."
-	parsed_reviews = nlp.nlp_analyze(reviews, top_n=3)
+	parsed_reviews = nlp.nlp_analyze(reviews, top_n=10)
 
 	d = json.dumps(dict(url=target_url, revs=parsed_reviews))
 	return 'myParser(' + d + ');'

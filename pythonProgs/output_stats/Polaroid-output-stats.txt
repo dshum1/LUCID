@@ -1,46 +1,49 @@
 === RESULTS ===
 
 === Commonest 1-words ===
-1 = this (145 = 2.614%)
-2 = camera (140 = 2.523%)
-3 = for (128 = 2.307%)
+1 = case (1093 = 4.997%)
+2 = my (608 = 2.780%)
+3 = phone (555 = 2.537%)
+4 = this (500 = 2.286%)
+5 = great (412 = 1.883%)
+6 = for (369 = 1.687%)
+7 = on (306 = 1.399%)
+8 = good (297 = 1.358%)
+9 = but (254 = 1.161%)
+10 = very (236 = 1.079%)
 
 === Commonest 2-words ===
-1 = this camera (43 = 0.775%)
-2 = for my (26 = 0.468%)
-3 = bought this (22 = 0.396%)
+1 = this case (245 = 1.120%)
+2 = my phone (217 = 0.992%)
+3 = great case (134 = 0.612%)
+4 = iphone 6 (95 = 0.434%)
+5 = case for (85 = 0.388%)
+6 = screen protector (76 = 0.347%)
+7 = dropped my (68 = 0.310%)
+8 = for my (64 = 0.292%)
+9 = my iphone (63 = 0.288%)
+10 = good case (55 = 0.251%)
 
 === Commonest 3-words ===
-1 = bought this for (10 = 0.180%)
-2 = this for my (8 = 0.144%)
-3 = -small photo size (8 = 0.144%)
+1 = dropped my phone (57 = 0.260%)
+2 = my iphone 6 (25 = 0.114%)
+3 = great case for (23 = 0.105%)
+4 = have dropped my (22 = 0.100%)
+5 = on my phone (20 = 0.091%)
+6 = glass screen protector (19 = 0.086%)
+7 = case great case (18 = 0.082%)
+8 = i've dropped my (18 = 0.082%)
+9 = this case has (16 = 0.073%)
+10 = spigen tough armor (15 = 0.068%)
 
 === Commonest 4-words ===
-1 = bought this for my (6 = 0.108%)
-2 = for 20 exposures note (5 = 0.090%)
-3 = for my daughter she (4 = 0.072%)
-
-=== Commonest Personal Pronouns ===
-1 = it (259 = 67.97%)
-2 = you (54 = 14.17%)
-3 = she (33 = 8.661%)
-
-=== Commonest Nouns ===
-1 = i (253 = 14.20%)
-2 = camera (142 = 7.973%)
-3 = love (63 = 3.537%)
-
-=== Commonest Adjectives ===
-1 = great (51 = 8.044%)
-2 = cute (27 = 4.258%)
-3 = good (27 = 4.258%)
-
-=== Commonest Adverbs ===
-1 = really (34 = 10.14%)
-2 = just (20 = 5.970%)
-3 = how (18 = 5.373%)
-
-=== Commonest Verbs ===
-1 = bought (38 = 4.761%)
-2 = take (23 = 2.882%)
-3 = get (22 = 2.756%)
+1 = have dropped my phone (18 = 0.082%)
+2 = i've dropped my phone (15 = 0.068%)
+3 = my phone few times (13 = 0.059%)
+4 = dropped my phone few (13 = 0.059%)
+5 = so far so good (10 = 0.045%)
+6 = has saved my phone (9 = 0.041%)
+7 = bought this for my (8 = 0.036%)
+8 = spigen tough armor case (8 = 0.036%)
+9 = case for iphone 6 (8 = 0.036%)
+10 = this case looks great (6 = 0.027%)

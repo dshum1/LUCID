@@ -35,13 +35,40 @@ $(document).ready( function(){
 	            	for (i = 0; i < four_gram.length; i++)
 	            		reviews4.push(four_gram[i]['words']);	
 
-
 	            	document.getElementById('status').style.display = "none";
+	            	// var list = document.createElement("UL");
 
-	            	document.getElementById('2-gram_para').textContent = reviews2;
-	            	document.getElementById('3-gram_para').textContent = reviews3;
-	            	document.getElementById('4-gram_para').textContent = reviews4;
-	                // document.getElementById('urlTarget').textContent = data['url'];
+	            	// 2-grams
+	            	var html_revList = '<ul class="list_of_revs">';
+					for(var i=0; i<reviews2.length; i++) {
+						html_revList += '<li>' + reviews2[i] + '</li>';
+					}
+					html_revList += '</ul>';
+	            	document.getElementById('2-gram_para').innerHTML = html_revList;
+
+	            	// 3-grams
+	            	var html_revList = '<ul class="list_of_revs">';
+					for(var i=0; i<reviews3.length; i++) {
+						html_revList += '<li>' + reviews3[i] + '</li>';
+					}
+					html_revList += '</ul>';
+	            	document.getElementById('3-gram_para').innerHTML = html_revList;
+
+	            	// 4-grams
+	            	var html_revList = '<ul class="list_of_revs">';
+					for(var i=0; i<reviews4.length; i++) {
+						html_revList += '<li>' + reviews4[i] + '</li>';
+					}
+					html_revList += '</ul>';
+	            	document.getElementById('4-gram_para').innerHTML = html_revList;
+
+	            	// Display panels
+	            	var panels = document.getElementsByClassName('panel-rev');
+					for (i = 0; i < panels.length; i++) {
+					    panels[i].style.display = "block";
+					}
+
+
 	            },
 	            error:
 	            function (jqXHR, textStatus, errorThrown) {
