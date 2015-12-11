@@ -85,7 +85,7 @@ def print_n_word_frequencies(n_word_counter, top_n, out, tag=None):
 #   top_n = the top n most frequent k-grams. default is 20
 #   allowdigits = allow digits to be parsed. default is true
 #   ignore_file = file of words to ignore in json format. 
-def nlp_analyze(input_list, max_n_word=4, top_n=20, allow_digits=True, ignore_file='ignore.json'):
+def nlp_analyze(input_list, max_n_word=6, top_n=20, allow_digits=True, ignore_file='ignore.json'):
    
     # build ignore list from argument file 
     print "[nlp] Building ignore list..."
@@ -93,9 +93,9 @@ def nlp_analyze(input_list, max_n_word=4, top_n=20, allow_digits=True, ignore_fi
         ignore_list = json.load(ignore_json)
 
     # Dynamically allocated n-word counters
-    n_words = ['' for i in range(max_n_word)]
-    prev_n_words = ['' for i in range(max_n_word)]
-    counters = [collections.Counter() for i in range(max_n_word)]
+    # n_words = ['' for i in range(max_n_word)]
+    # prev_n_words = ['' for i in range(max_n_word)]
+    # counters = [collections.Counter() for i in range(max_n_word)]
 
     # Read in all of the words in a file
     print "[nlp] Reading reviews..."
@@ -139,34 +139,62 @@ def nlp_analyze(input_list, max_n_word=4, top_n=20, allow_digits=True, ignore_fi
         words = re.findall(r"['\-A-Za-z]+", text)
 
     print "[nlp] Performing frequency analysis of n-words..."
-    for word in words:
-        word = word.strip(r"&^%$#@!")       
+    # for word in words:
+    #     word = word.strip(r"&^%$#@!")       
 
-        if word in ignore_list:
-            continue
+    #     if word in ignore_list:
+    #         continue
 
-        # Allow hyphenated words, but not hyphens as words on their own.
-        if word == '-':
-            continue
+    #     # Allow hyphenated words, but not hyphens as words on their own.
+    #     if word == '-':
+    #         continue
 
-        # Tally words.
-        for i in range(1, max_n_word):
-            if prev_n_words[i - 1] != '':
-                n_words[i] = prev_n_words[i - 1] + ' ' + word
-                counters[i][n_words[i]] += 1
+    #     # Tally words.
+    #     for i in range(1, max_n_word):
+    #         if prev_n_words[i - 1] != '':
+    #             n_words[i] = prev_n_words[i - 1] + ' ' + word
+    #             counters[i][n_words[i]] += 1
 
-        n_words[0] = word
-        counters[0][word] += 1
+    #     n_words[0] = word
+    #     counters[0][word] += 1
 
-        for i in range(0, max_n_word):
-            prev_n_words[i] = n_words[i]
+    #     for i in range(0, max_n_word):
+    #         prev_n_words[i] = n_words[i]
 
+    # counters = [[collections.Counter() for i in range(len(input_list))] for i in range(max_n_word)] 
+    review_list = []
+    counters = [collections.Counter() for i in range(max_n_word)] 
+    for j in range(0, len(input_list)):
+        n_words = ['' for i in range(max_n_word)]
+        prev_n_words = ['' for i in range(max_n_word)]
+        review = input_list[j]
+        words = re.findall(r"['\-\w]+", review)
+        for word in words:
+            word = word.lower().strip(r"&^%$#@!")       
+
+            if word in ignore_list:
+                continue
+
+            # Allow hyphenated words, but not hyphens as words on their own.
+            if word == '-':
+                continue
+
+            # Tally words.
+            for i in range(1, max_n_word):
+                if prev_n_words[i - 1] != '':
+                    n_words[i] = prev_n_words[i - 1] + ' ' + word
+                    counters[i][n_words[i]] += 1
+            n_words[0] = word
+            counters[0][word] += 1
+
+            for i in range(0, max_n_word):
+                prev_n_words[i] = n_words[i]
 
     # Print results to file.
     print "[nlp] Text analyzed. Outputting results..."
     # print '\n===' + blue + ' RESULTS ' + normal + '==='
 
-    out = open('output_stats/Polaroid-output-stats.txt', 'w')
+    out = open('output_stats/HD-output-stats-1.txt', 'w')
     out.write('=== RESULTS ===\n')
 
     # Build dictionary of results
