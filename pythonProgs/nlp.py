@@ -23,6 +23,7 @@ import re
 import collections
 import nltk
 import json
+import requests
 
 # Font effects --> fancy console colours in bash
 underline = "\x1b[1;4m"
@@ -40,8 +41,12 @@ previous_pair = ''
 previous_triple = ''
 previous_quad = ''
 
+def sentiment_analysis(text):
+    r_post = requests.post("http://text-processing.com/api/sentiment/", data = {"text":text})
+    return r_post
 
-def print_n_word_frequencies(n_word_counter, top_n, out, tag=None):
+
+def frequency_analysis(n_word_counter, top_n, out, tag=None):
     total_entries = sum(n_word_counter.values())
     unique_entries = len(n_word_counter)
     result_list = []
@@ -72,8 +77,19 @@ def print_n_word_frequencies(n_word_counter, top_n, out, tag=None):
             out.write(str(i + 1) + ' = ' + n_word + ' (' + str(count).split('.')[0] +
             ' = ' + str(perc)[:5] + '%)\n')
 
+            # perform sentiment analysis
+            sent_json = sentiment_analysis(n_word)
+            sent = sent_json.json()
+
             # Build results list
-            result_list.append({'words':n_word, 'rank':i+1, 'count':count, "percent":perc})
+            result_list.append({'words' : n_word, 
+                                'rank' : i+1, 
+                                'count' : count, 
+                                'percent' : perc,
+                                'sent_label' : sent[label],
+                                'sent_positive' : sent[pos],
+                                'sent_negative' : sent[neg],
+                                'sent_neutral' : sent[neutral] })
 
     return result_list
 
@@ -200,13 +216,13 @@ def nlp_analyze(input_list, max_n_word=6, top_n=20, allow_digits=True, ignore_fi
     # Build dictionary of results
     results_dict = {}
     for i in range(max_n_word):
-        results_dict[str(i+1)+'-gram'] = print_n_word_frequencies(counters[i], top_n, out)
+        results_dict[str(i+1)+'-gram'] = frequency_analysis(counters[i], top_n, out)
 
-    # results_dict['pps'] = print_n_word_frequencies(personal_pronoun_counter, top_n, out, tag="Personal Pronouns")
-    # results_dict['nouns'] = print_n_word_frequencies(noun_counter, top_n, out, tag="Nouns")
-    # results_dict['adjectives'] = print_n_word_frequencies(adjective_counter, top_n, out, tag="Adjectives")
-    # results_dict['adverbs'] = print_n_word_frequencies(adverb_counter, top_n, out, tag="Adverbs")
-    # results_dict['verbs'] = print_n_word_frequencies(verb_counter, top_n, out, tag="Verbs")
+    # results_dict['pps'] = frequency_analysis(personal_pronoun_counter, top_n, out, tag="Personal Pronouns")
+    # results_dict['nouns'] = frequency_analysis(noun_counter, top_n, out, tag="Nouns")
+    # results_dict['adjectives'] = frequency_analysis(adjective_counter, top_n, out, tag="Adjectives")
+    # results_dict['adverbs'] = frequency_analysis(adverb_counter, top_n, out, tag="Adverbs")
+    # results_dict['verbs'] = frequency_analysis(verb_counter, top_n, out, tag="Verbs")
 
     out.close()
     print "[nlp] Done."
