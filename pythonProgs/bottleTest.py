@@ -13,17 +13,6 @@ import nlp
 
 app = Bottle()
 
-# Testing
-@app.route('/hello')
-def hello():
-    return "Hello World!"
-
-# Testing URL parameters -> function arguments
-@app.route('/')
-@app.route('/hello/<name>')
-def greet(name='Stranger'):
-    return template('Yo {{name}}, wattup wattup?', name=name)
-
 # Testing static file fetching
 @app.route('/static/<filename>')
 def server_static(filename):
@@ -75,7 +64,6 @@ def getReviews(target_url):
 # Start Server
 if __name__ == '__main__':
 	app.run(host='localhost', port=8080, debug=True)
-
 
 
 

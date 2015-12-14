@@ -41,9 +41,10 @@ previous_pair = ''
 previous_triple = ''
 previous_quad = ''
 
+# returns json of sentiment analysis
 def sentiment_analysis(text):
     r_post = requests.post("http://text-processing.com/api/sentiment/", data = {"text":text})
-    return r_post
+    return r_post.json()
 
 
 def frequency_analysis(n_word_counter, top_n, out, tag=None):
@@ -78,18 +79,18 @@ def frequency_analysis(n_word_counter, top_n, out, tag=None):
             ' = ' + str(perc)[:5] + '%)\n')
 
             # perform sentiment analysis
-            sent_json = sentiment_analysis(n_word)
-            sent = sent_json.json()
+            sentiment = sentiment_analysis(n_word)
 
             # Build results list
             result_list.append({'words' : n_word, 
                                 'rank' : i+1, 
                                 'count' : count, 
                                 'percent' : perc,
-                                'sent_label' : sent[label],
-                                'sent_positive' : sent[pos],
-                                'sent_negative' : sent[neg],
-                                'sent_neutral' : sent[neutral] })
+                                'sent_label' : sentiment['label'],
+                                'sent_positive' : sentiment['probability']['pos'],
+                                'sent_negative' : sentiment['probability']['neg'],
+                                'sent_neutral' : sentiment['probability']['neutral'] 
+                              })
 
     return result_list
 
