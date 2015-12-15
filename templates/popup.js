@@ -28,12 +28,18 @@ $(document).ready( function(){
 	            	var two_gram = data['revs']['2-gram'];
 	            	var three_gram = data['revs']['3-gram'];
 	            	var four_gram = data['revs']['4-gram'];
-	            	for (i = 0; i < two_gram.length; i++)
+	            	for (i = 0; i < two_gram.length; i++) {
 	            		reviews2.push(two_gram[i]['words']);
-	            	for (i = 0; i < three_gram.length; i++)
+	            		reviews2.push(two_gram[i]['count']);
+	            	}
+	            	for (i = 0; i < three_gram.length; i++) {
 	            		reviews3.push(three_gram[i]['words']);
-	            	for (i = 0; i < four_gram.length; i++)
-	            		reviews4.push(four_gram[i]['words']);	
+	            		reviews3.push(three_gram[i]['count']);
+	            	}
+	            	for (i = 0; i < four_gram.length; i++) {
+	            		reviews4.push(four_gram[i]['words']);
+	            		reviews4.push(four_gram[i]['count']);
+	            		}	
 
 	            	document.getElementById('status').style.display = "none";
 	            	// var list = document.createElement("UL");
