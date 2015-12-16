@@ -156,6 +156,8 @@ def nlp_analyze(input_list, max_n_word=6, top_n=20, allow_digits=True, ignore_fi
         words = re.findall(r"['\-A-Za-z]+", text)
 
     print "[nlp] Performing frequency analysis of n-words..."
+    
+    # # Analyze as a continuous stream of words
     # for word in words:
     #     word = word.strip(r"&^%$#@!")       
 
@@ -179,6 +181,8 @@ def nlp_analyze(input_list, max_n_word=6, top_n=20, allow_digits=True, ignore_fi
     #         prev_n_words[i] = n_words[i]
 
     # counters = [[collections.Counter() for i in range(len(input_list))] for i in range(max_n_word)] 
+    
+    # Analyze per review 
     review_list = []
     counters = [collections.Counter() for i in range(max_n_word)] 
     for j in range(0, len(input_list)):
