@@ -79,17 +79,17 @@ def frequency_analysis(n_word_counter, top_n, out, tag=None):
             ' = ' + str(perc)[:5] + '%)\n')
 
             # perform sentiment analysis
-            sentiment = sentiment_analysis(n_word)
+            # sentiment = sentiment_analysis(n_word)
 
             # Build results list
             result_list.append({'words' : n_word, 
                                 'rank' : i+1, 
                                 'count' : count, 
                                 'percent' : perc,
-                                'sent_label' : sentiment['label'],
-                                'sent_positive' : sentiment['probability']['pos'],
-                                'sent_negative' : sentiment['probability']['neg'],
-                                'sent_neutral' : sentiment['probability']['neutral'] 
+                                # 'sent_label' : sentiment['label'],
+                                # 'sent_positive' : sentiment['probability']['pos'],
+                                # 'sent_negative' : sentiment['probability']['neg'],
+                                # 'sent_neutral' : sentiment['probability']['neutral'] 
                               })
 
     return result_list
@@ -120,15 +120,15 @@ def nlp_analyze(input_list, max_n_word=6, top_n=20, allow_digits=True, ignore_fi
     # print "[nlp] [debuggery] joined text: " + text
 
     # Use nltk to classify/tag each word/token.
-    print "[nlp] Tokenizing text..."
-    tokenizer = nltk.tokenize.RegexpTokenizer(r'\w+|[^\w\s]+')
-    tokens = tokenizer.tokenize(text)
+    # print "[nlp] Tokenizing text..."
+    # tokenizer = nltk.tokenize.RegexpTokenizer(r'\w+|[^\w\s]+')
+    # tokens = tokenizer.tokenize(text)
 
-    # print "[nlp] Tagging tokens..."
+    # # print "[nlp] Tagging tokens..."
     # tagger = nltk.UnigramTagger(nltk.corpus.brown.tagged_sents())
     # tagged_tokens = tagger.tag(tokens)
 
-    # print "[nlp] Tallying tags..."
+    # # print "[nlp] Tallying tags..."
     # personal_pronoun_counter = collections.Counter()
     # adjective_counter = collections.Counter()
     # adverb_counter = collections.Counter()
@@ -157,40 +157,17 @@ def nlp_analyze(input_list, max_n_word=6, top_n=20, allow_digits=True, ignore_fi
 
     print "[nlp] Performing frequency analysis of n-words..."
     
-    # # Analyze as a continuous stream of words
-    # for word in words:
-    #     word = word.strip(r"&^%$#@!")       
-
-    #     if word in ignore_list:
-    #         continue
-
-    #     # Allow hyphenated words, but not hyphens as words on their own.
-    #     if word == '-':
-    #         continue
-
-    #     # Tally words.
-    #     for i in range(1, max_n_word):
-    #         if prev_n_words[i - 1] != '':
-    #             n_words[i] = prev_n_words[i - 1] + ' ' + word
-    #             counters[i][n_words[i]] += 1
-
-    #     n_words[0] = word
-    #     counters[0][word] += 1
-
-    #     for i in range(0, max_n_word):
-    #         prev_n_words[i] = n_words[i]
-
-    # counters = [[collections.Counter() for i in range(len(input_list))] for i in range(max_n_word)] 
-    
-    # Analyze per review 
     review_list = []
     counters = [collections.Counter() for i in range(max_n_word)] 
+    tokenizer = nltk.tokenize.RegexpTokenizer(r'\w+|[^\w\s]+')
+    tagger = nltk.UnigramTagger(nltk.corpus.brown.tagged_sents())
     for j in range(0, len(input_list)):
         n_words = ['' for i in range(max_n_word)]
         prev_n_words = ['' for i in range(max_n_word)]
         review = input_list[j]
         words = re.findall(r"['\-\w]+", review)
         for word in words:
+
             word = word.lower().strip(r"&^%$#@!")       
 
             if word in ignore_list:
@@ -200,13 +177,38 @@ def nlp_analyze(input_list, max_n_word=6, top_n=20, allow_digits=True, ignore_fi
             if word == '-':
                 continue
 
+            token = tokenizer.tokenize(word)
+            print "[nlp] Tagging tokens..."
+            tagged_token = tagger.tag(token)[0]
+
+            score = 0.2
+
+            if tagged_token[1] == None:
+                continue
+            elif 'PPS' in tagged_token[1]:
+                score = 0.1
+            elif 'CC' in tagged_token[1]:
+                score = 0.1                
+            elif 'JJ' in tagged_token[1]: #adjective
+                score = 10
+            elif 'NN' in tagged_token[1]: #noun
+                score = 0.3
+            elif 'IN' in tagged_token[1]: #preposition
+                score = 0.2
+            elif 'RB' in tagged_token[1]: #adverb
+                score = 0.5
+            elif 'VB' in tagged_token[1]: #verb
+                score = 2
+            elif '*' in tagged_token[1]: #not
+                score = 1
+
             # Tally words.
             for i in range(1, max_n_word):
                 if prev_n_words[i - 1] != '':
                     n_words[i] = prev_n_words[i - 1] + ' ' + word
-                    counters[i][n_words[i]] += 1
+                    counters[i][n_words[i]] += score
             n_words[0] = word
-            counters[0][word] += 1
+            counters[0][word] += score
 
             for i in range(0, max_n_word):
                 prev_n_words[i] = n_words[i]
