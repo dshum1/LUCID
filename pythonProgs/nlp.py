@@ -155,8 +155,7 @@ def nlp_analyze(input_list, max_n_word=6, top_n=20, allow_digits=True, ignore_fi
     else:
         words = re.findall(r"['\-A-Za-z]+", text)
 
-    print "[nlp] Performing frequency analysis of n-words..."
-    
+    print "[nlp] Frequency Analysis and tagging tokens..."
     review_list = []
     counters = [collections.Counter() for i in range(max_n_word)] 
     tokenizer = nltk.tokenize.RegexpTokenizer(r'\w+|[^\w\s]+')
@@ -178,7 +177,6 @@ def nlp_analyze(input_list, max_n_word=6, top_n=20, allow_digits=True, ignore_fi
                 continue
 
             token = tokenizer.tokenize(word)
-            print "[nlp] Tagging tokens..."
             tagged_token = tagger.tag(token)[0]
 
             score = 0.2
@@ -186,21 +184,21 @@ def nlp_analyze(input_list, max_n_word=6, top_n=20, allow_digits=True, ignore_fi
             if tagged_token[1] == None:
                 continue
             elif 'PPS' in tagged_token[1]:
-                score = 0.1
-            elif 'CC' in tagged_token[1]:
-                score = 0.1                
-            elif 'JJ' in tagged_token[1]: #adjective
-                score = 10
-            elif 'NN' in tagged_token[1]: #noun
-                score = 0.3
-            elif 'IN' in tagged_token[1]: #preposition
-                score = 0.2
-            elif 'RB' in tagged_token[1]: #adverb
-                score = 0.5
-            elif 'VB' in tagged_token[1]: #verb
-                score = 2
-            elif '*' in tagged_token[1]: #not
                 score = 1
+            elif 'CC' in tagged_token[1]:
+                score = 1                
+            elif 'JJ' in tagged_token[1]: #adjective
+                score = 100
+            elif 'NN' in tagged_token[1]: #noun
+                score = 3
+            elif 'IN' in tagged_token[1]: #preposition
+                score = 2
+            elif 'RB' in tagged_token[1]: #adverb
+                score = 5
+            elif 'VB' in tagged_token[1]: #verb
+                score = 20
+            elif '*'  in tagged_token[1]: #not
+                score = 10
 
             # Tally words.
             for i in range(1, max_n_word):
