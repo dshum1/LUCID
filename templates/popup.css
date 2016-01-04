@@ -22,6 +22,9 @@ body {
   white-space: pre;
   text-overflow: ellipsis;
   overflow: visible;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
 #lucid_header {
