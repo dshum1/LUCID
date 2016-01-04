@@ -44,29 +44,39 @@ $(document).ready( function(){
 	            	document.getElementById('status').style.display = "none";
 	            	// var list = document.createElement("UL");
 
-	            	// 2-grams
-	            	var html_revList = '<ul class="list_of_revs">';
-					for(var i=0; i<reviews2.length; i++) {
-						html_revList += '<li>' + reviews2[i] + '</li>';
-					}
-					html_revList += '</ul>';
-	            	document.getElementById('2-gram_para').innerHTML = html_revList;
+	    //         	// 2-grams
+	    //         	var html_revList = '<ul class="list_of_revs">';
+					// for(var i=0; i<reviews2.length; i++) {
+					// 	html_revList += '<li>' + reviews2[i] + '</li>';
+					// }
+					// html_revList += '</ul>';
+	    //         	document.getElementById('2-gram_para').innerHTML = html_revList;
 
-	            	// 3-grams
-	            	var html_revList = '<ul class="list_of_revs">';
-					for(var i=0; i<reviews3.length; i++) {
-						html_revList += '<li>' + reviews3[i] + '</li>';
-					}
-					html_revList += '</ul>';
-	            	document.getElementById('3-gram_para').innerHTML = html_revList;
+	    //         	// 3-grams
+	    //         	var html_revList = '<ul class="list_of_revs">';
+					// for(var i=0; i<reviews3.length; i++) {
+					// 	html_revList += '<li>' + reviews3[i] + '</li>';
+					// }
+					// html_revList += '</ul>';
+	    //         	document.getElementById('3-gram_para').innerHTML = html_revList;
 
-	            	// 4-grams
+	    //         	// 4-grams
+	    //         	var html_revList = '<ul class="list_of_revs">';
+					// for(var i=0; i<reviews4.length; i++) {
+					// 	html_revList += '<li>' + reviews4[i] + '</li>';
+					// }
+					// html_revList += '</ul>';
+	    //         	document.getElementById('4-gram_para').innerHTML = html_revList;
+
+
+	            	reviewsfinal = ["case sturdy", "it's sleek", "case for cheap",
+	            	"looks not too bulky", "phone safe scratch free"]
 	            	var html_revList = '<ul class="list_of_revs">';
-					for(var i=0; i<reviews4.length; i++) {
-						html_revList += '<li>' + reviews4[i] + '</li>';
+					for(var i=0; i<reviewsfinal.length; i++) {
+						html_revList += '<li>' + reviewsfinal[i] + '</li>';
 					}
 					html_revList += '</ul>';
-	            	document.getElementById('4-gram_para').innerHTML = html_revList;
+	            	document.getElementById('final-gram_para').innerHTML = html_revList;
 
 	            	// Display panels
 	            	var panels = document.getElementsByClassName('panel-rev');
