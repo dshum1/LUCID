@@ -179,7 +179,7 @@ def nlp_analyze(input_list, max_n_word=6, top_n=20, allow_digits=True, ignore_fi
             token = tokenizer.tokenize(word)
             tagged_token = tagger.tag(token)[0]
 
-            score = 0.2
+            score = 0
 
             if tagged_token[1] == None:
                 continue

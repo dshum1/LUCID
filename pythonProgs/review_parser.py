@@ -4,6 +4,8 @@ import re
 import sys
 import nlp
 
+amzn = AmazonScraper("AKIAIHLTHDMOAJIHQ3EQ", "5kfeAkXH1Z9dE/bl7wpdInGhOaXQ0S5HKgTSg6h4", "lucid064")
+
 def get_item_id(url):
 	m = re.search(r"\/dp\/\w+\/", url)
 	if m:
@@ -25,7 +27,7 @@ def get_reviews(item_id, num_reviews=500):
 		else:
 			break
 	# return full_reviews
-	out_file = open("fuzzysocks.json", "w")
+	out_file = open("gummybears.json", "w")
 	json.dump(review_titles+full_reviews,out_file)
 
 if __name__ == "__main__":

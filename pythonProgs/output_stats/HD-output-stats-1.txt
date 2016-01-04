@@ -1,0 +1,73 @@
+=== RESULTS ===
+
+=== Commonest 1-words ===
+1 = best (800 = 2.740%)
+2 = bulky (660 = 2.260%)
+3 = slim (590 = 2.021%)
+4 = awesome (570 = 1.952%)
+5 = tough (540 = 1.849%)
+6 = sturdy (540 = 1.849%)
+7 = durable (520 = 1.781%)
+8 = excellent (480 = 1.644%)
+9 = easy (460 = 1.575%)
+10 = solid (450 = 1.541%)
+
+=== Commonest 2-words ===
+1 = too bulky (180 = 0.716%)
+2 = not bulky (160 = 0.636%)
+3 = case sleek (70 = 0.278%)
+4 = far best (70 = 0.278%)
+5 = case sturdy (70 = 0.278%)
+6 = for new (70 = 0.278%)
+7 = just right (60 = 0.238%)
+8 = have dropped (56 = 0.222%)
+9 = fits perfect (50 = 0.199%)
+10 = it's sleek (50 = 0.199%)
+
+=== Commonest 3-words ===
+1 = not too bulky (100 = 0.441%)
+2 = by far best (70 = 0.308%)
+3 = case for cheap (50 = 0.220%)
+4 = not to bulky (40 = 0.176%)
+5 = being too bulky (40 = 0.176%)
+6 = case well worth (30 = 0.132%)
+7 = case it's sleek (30 = 0.132%)
+8 = case fits perfect (30 = 0.132%)
+9 = like how slim (30 = 0.132%)
+10 = looks brand new (20 = 0.088%)
+
+=== Commonest 4-words ===
+1 = without being too bulky (40 = 0.193%)
+2 = looks not too bulky (40 = 0.193%)
+3 = looking but best functional (20 = 0.096%)
+4 = far it's been excellent (20 = 0.096%)
+5 = phone safe scratch free (20 = 0.096%)
+6 = you don't like big (20 = 0.096%)
+7 = potatoes what saves poor (20 = 0.096%)
+8 = poor quality case cheap (20 = 0.096%)
+9 = case works looks beautiful (20 = 0.096%)
+10 = for anyone who clumsy (20 = 0.096%)
+
+=== Commonest 5-words ===
+1 = protection without being too bulky (30 = 0.158%)
+2 = dropped phone maybe seven different (20 = 0.105%)
+3 = keeping phone safe scratch free (20 = 0.105%)
+4 = looks simple elegant but durable (20 = 0.105%)
+5 = case with clean lines sturdy (20 = 0.105%)
+6 = to someone else after heavy (20 = 0.105%)
+7 = make phone thicker but easy (20 = 0.105%)
+8 = like combination hard shell pliable (20 = 0.105%)
+9 = case have dropped phone numerous (20 = 0.105%)
+10 = case but it's super slick (20 = 0.105%)
+
+=== Commonest 6-words ===
+1 = sleek but sides not being round (20 = 0.113%)
+2 = far in opinion not only best (20 = 0.113%)
+3 = for anyone who clumsy or prone (20 = 0.113%)
+4 = only best looking but best functional (20 = 0.113%)
+5 = feel all like other competitors heavy (20 = 0.113%)
+6 = but phone survived thanks to awesome (20 = 0.113%)
+7 = over month or so was fine (20 = 0.113%)
+8 = few times case protected just fine (20 = 0.113%)
+9 = other colors to mix match overall (20 = 0.113%)
+10 = when got it'd stuck in ugly (20 = 0.113%)
